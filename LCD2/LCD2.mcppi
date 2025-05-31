@@ -45,6 +45,7 @@ File0=Lcd_Constants
 File1=Lcd
 Count=2
 [EXPANDED_NODES]
-Count=0
+0=LCD2.mcppi
+Count=1
 [LIB_EXPANDED_NODES]
-Count=0
+Count=1

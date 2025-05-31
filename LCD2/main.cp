@@ -1,4 +1,4 @@
-#line 1 "C:/Users/FernandezMiguelA/Desktop/toDiffer/PIC/LCD2/main.c"
+#line 1 "C:/Users/FernandezMiguelA/Desktop/toDiffer/PIC/projectos/LCD2/main.c"
 #line 1 "c:/mikroelektronika/mikroc_pro_for_pic/include/stdint.h"
 
 
@@ -41,7 +41,7 @@ typedef unsigned int uintptr_t;
 
 typedef signed long int intmax_t;
 typedef unsigned long int uintmax_t;
-#line 5 "C:/Users/FernandezMiguelA/Desktop/toDiffer/PIC/LCD2/main.c"
+#line 5 "C:/Users/FernandezMiguelA/Desktop/toDiffer/PIC/projectos/LCD2/main.c"
 uint8_t segment[10]={
 63,6,91,79,102,109,125,7,127,103
 };
@@ -92,7 +92,7 @@ void main()
 
  while (1){
  Delay_ms(500);
-#line 62 "C:/Users/FernandezMiguelA/Desktop/toDiffer/PIC/LCD2/main.c"
+#line 62 "C:/Users/FernandezMiguelA/Desktop/toDiffer/PIC/projectos/LCD2/main.c"
  i=0;
  for(;i<10; i++){
  PORTB=segment[i];

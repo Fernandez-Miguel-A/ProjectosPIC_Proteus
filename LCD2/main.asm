@@ -2,11 +2,11 @@
 _main:
 
 ;main.c,32 :: 		void main()
-;main.c,36 :: 		TRISB = 0;                        // Configure PORTB pins as salidas
+;main.c,36 :: 		TRISB = 0;            // 7-segm       // Configure PORTB pins as salidas
 	CLRF       TRISB+0
-;main.c,37 :: 		TRISD = 0;
+;main.c,37 :: 		TRISD = 0;            //LCD-cmd
 	CLRF       TRISD+0
-;main.c,38 :: 		TRISA = 0;
+;main.c,38 :: 		TRISA = 0;            //LCD
 	CLRF       TRISA+0
 ;main.c,40 :: 		ADCON1 |= 0x06;      // PINES HABILITADOS COMO DIGITALES
 	MOVLW      6
