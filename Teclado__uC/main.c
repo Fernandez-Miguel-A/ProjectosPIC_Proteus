@@ -1,5 +1,5 @@
 #include "stdint.h"
-
+#include <ctype.h>
 
 
 uint8_t segment[10]={  //125
@@ -53,7 +53,8 @@ void main()
                
     while (1){        
         c = '1';  
-        Lcd_Out(1,9,c);
+        Lcd_Chr(1,11,c);
+//        Lcd_Out(1,9,c);
     }
 
 }
