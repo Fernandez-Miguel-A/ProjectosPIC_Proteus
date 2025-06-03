@@ -38,7 +38,8 @@ enum teclado_estado {E1, E2, E3, E4, Efin};
 uint8_t estado_teclado= E1;
 
 #define    LED1    RC6_bit  
-#define    LED2    RC7_bit
+#define    LED2    RC7_bit  
+#define    but    RB0_bit
 
 int8_t atoi(char c)
 {
@@ -73,6 +74,7 @@ void main()
     //TRISA = 0xff;            // teclado       // Configure PORTB pins as salidas
     //TRISB = 0;
     TRISC = 0;            //LCD LCD-cmd
+    TRISB = 0x1;
     
     ADCON1 |= 0x0f;      // PINES HABILITADOS COMO DIGITALES
 //    ADCON0 |= 0x0f;      // PINES HABILITADOS COMO DIGITALES
@@ -94,9 +96,9 @@ void main()
     
     Lcd_Out(1,1,txt3);                 // Write text in first row                               
     Lcd_Out(2,1,"PIC  es la onda!");                 // Write text in first row
-               
-    while (1){        
-        c = '0';  
+    c = '0';
+    while (1){
+             
         
         do {  
            kp = Keypad_Key_Press();
@@ -105,6 +107,12 @@ void main()
            }
            Lcd_Chr(1,16,c++);
            
+           
+           if (but == 0){
+              Lcd_Out(2,1,"               ");
+              IntToStr(retardo, Txt);
+              Lcd_Out(2,1,Txt);
+           } 
             LED1 = 1;
             Retardo_ms(retardo);     //retardo
             LED1 = 0;         
@@ -145,6 +153,7 @@ void main()
         if(tecla == '='){
             if(retardo_s[0] != 0)
                 retardo = StrToInt(retardo_s);
+                
         }
         if(!isdigit(tecla)){
                 estado_teclado = Efin;
@@ -182,7 +191,9 @@ void main()
                      Delay_ms(600);
                      estado_teclado = E1;
                      break;
-        }    
+        } 
+        
+        Lcd_Out(2, 9, retardo_s);   
         
     }
 
