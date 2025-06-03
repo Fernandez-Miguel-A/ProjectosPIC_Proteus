@@ -31,7 +31,7 @@ char Txt[20];
 
 
 int res_=0;
-uint8_t retardo = 500; // en 'msecs'
+int retardo = 500; // en 'msecs' .0-> 65535
 char retardo_s[5];
 
 enum teclado_estado {E1, E2, E3, E4, Efin};
@@ -109,7 +109,7 @@ void main()
            
            
            if (but == 0){
-              Lcd_Out(2,1,"               ");
+              Lcd_Out(2,1,"                ");
               IntToStr(retardo, Txt);
               Lcd_Out(2,1,Txt);
            } 
@@ -156,7 +156,7 @@ void main()
                 
         }
         if(!isdigit(tecla)){
-                estado_teclado = Efin;
+            estado_teclado = Efin;
         }
                           
         switch(estado_teclado){
@@ -193,7 +193,7 @@ void main()
                      break;
         } 
         
-        Lcd_Out(2, 9, retardo_s);   
+//        Lcd_Out(2, 9, retardo_s);   
         
     }
 
