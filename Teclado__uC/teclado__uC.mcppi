@@ -43,20 +43,17 @@ Count=0
 [Useses]
 File0=Lcd
 File1=Lcd_Constants
-Count=2
+File2=Keypad4x4
+File3=Conversions
+File4=C_String
+File5=C_Type
+Count=6
 [EXPANDED_NODES]
-Count=0
+0=teclado__uC.mcppi
+Count=1
 [LIB_EXPANDED_NODES]
 0=mikroE Libraries
 1=System Libraries
-2=ADC
-9=CAN_SPI
-18=Compact_Flash
-30=Conversions
-57=C_Math
-79=C_Stdlib
-93=C_String
-113=C_Type
 129=EPSON_S1D13700
 162=FLASH
 196=I2C
@@ -73,4 +70,4 @@ Count=0
 478=T6963C
 509=TouchPanel
 521=UART
-Count=26
+Count=18
