@@ -1,0 +1,12 @@
+*.asm
+*.ini
+*.cp
+# cof y 
+# hex se mantienen
+*.mcl
+*.dbg
+*.dct
+*.dlt
+*.log
+*.lst
+*.mcppi_callertable.txt
