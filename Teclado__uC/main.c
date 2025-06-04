@@ -7,22 +7,22 @@ uint8_t segment[10]={  //125
 63,6,91,79,102,109,125,7,127,103
 };
  
-char keypadPort at PORTD;   
+char keypadPort at PORTC;   
      
 // Lcd module connections
-sbit LCD_RS at RC4_bit;   //PORTDbits.RD4    //LATD4_bit   //LATDbits.LATD4     //PORTD //LATD
-sbit LCD_EN at RC5_bit;
-sbit LCD_D4 at RC0_bit;
-sbit LCD_D5 at RC1_bit;
-sbit LCD_D6 at RC2_bit;
-sbit LCD_D7 at RC3_bit;
+sbit LCD_RS at RB4_bit;   //PORTDbits.RD4    //LATD4_bit   //LATDbits.LATD4     //PORTD //LATD
+sbit LCD_EN at RB5_bit;
+sbit LCD_D4 at RB0_bit;
+sbit LCD_D5 at RB1_bit;
+sbit LCD_D6 at RB2_bit;
+sbit LCD_D7 at RB3_bit;
                       
-sbit LCD_RS_Direction at TRISC4_bit;   // TRISDbits.RD4    //TRISD
-sbit LCD_EN_Direction at TRISC5_bit;
-sbit LCD_D4_Direction at TRISC0_bit;
-sbit LCD_D5_Direction at TRISC1_bit;
-sbit LCD_D6_Direction at TRISC2_bit;
-sbit LCD_D7_Direction at TRISC3_bit;
+sbit LCD_RS_Direction at TRISB4_bit;   // TRISBbits.RD4    //TRISB
+sbit LCD_EN_Direction at TRISB5_bit;
+sbit LCD_D4_Direction at TRISB0_bit;
+sbit LCD_D5_Direction at TRISB1_bit;
+sbit LCD_D6_Direction at TRISB2_bit;
+sbit LCD_D7_Direction at TRISB3_bit;
 
 
 char txt3[] = "Lcd4bit:";
@@ -37,9 +37,9 @@ char retardo_s[5];
 enum teclado_estado {E1, E2, E3, E4, Efin};
 uint8_t estado_teclado= E1;
 
-#define    LED1    RC6_bit  
-#define    LED2    RC7_bit  
-#define    but    RB0_bit
+#define    LED1    RB6_bit  
+#define    LED2    RB7_bit  
+#define    but    RE0_bit
 
 int8_t atoi(char c)
 {
@@ -71,10 +71,10 @@ void main()
     char c, tecla= ' ';
     uint8_t kp;
     
-    //TRISA = 0xff;            // teclado       // Configure PORTB pins as salidas
-    //TRISB = 0;
-    TRISC = 0;            //LCD LCD-cmd
-    TRISB = 0x1;
+    TRISB6_bit = 0;            //LED1
+    TRISB7_bit = 0;            //LED2
+
+    TRISE0_bit = 1;	       //boton
     
     ADCON1 |= 0x0f;      // PINES HABILITADOS COMO DIGITALES
 //    ADCON0 |= 0x0f;      // PINES HABILITADOS COMO DIGITALES
@@ -82,8 +82,8 @@ void main()
 //    EECON1 |= 0XF;
 //    CMCON  |= 0x7;
     
-    PORTC = 0;
-//    PORTA = 0xFF;
+    RB6_bit = 0;
+    RB7_bit = 0;
               
     Keypad_Init();
     
