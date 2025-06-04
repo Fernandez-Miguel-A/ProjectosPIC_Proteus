@@ -74,7 +74,7 @@ void main()
     TRISB6_bit = 0;            //LED1
     TRISB7_bit = 0;            //LED2
 
-    TRISE0_bit = 1;	       //boton
+    TRISE0_bit = 1;               //boton
     
     ADCON1 |= 0x0f;      // PINES HABILITADOS COMO DIGITALES
 //    ADCON0 |= 0x0f;      // PINES HABILITADOS COMO DIGITALES
@@ -101,7 +101,7 @@ void main()
              
         
         do {  
-           kp = Keypad_Key_Press();
+           kp = Keypad_Key_Click();
            if(!isdigit(c)){// && (atoi(c)>9)){
                  c = '0'; 
            }
