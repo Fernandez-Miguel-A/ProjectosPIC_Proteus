@@ -65,11 +65,37 @@ void Retardo_ms(int n)
      }
 }
 
+char Keypad_Get_Char(void)
+{
+    char c, tecla;
+    c = Keypad_Key_Click();
+    switch (c) {                                                                                
+        case  1: tecla = 55; break; // 7
+        case  2: tecla = 56; break; // 8
+        case  3: tecla = 57; break; // 9
+        case  4: tecla = '%'; break; // A
+        case  5: tecla = 52; break; // 4
+        case  6: tecla = 53; break; // 5
+        case  7: tecla = 54; break; // 6
+        case  8: tecla = '*'; break; // B
+        case  9: tecla = 49; break; // 1        // Uncomment this block for keypad4x4
+        case 10: tecla = 50; break; // 2
+        case 11: tecla = 51; break; // 3
+        case 12: tecla = '-'; break; // C
+        case 13: tecla = 'C'; break; // *
+        case 14: tecla = 48; break; // 0
+        case 15: tecla = '='; break; // #
+        case 16: tecla = '+'; break; // D
+        default: tecla = c;                                                                                        //Unico valor al parecer es:  0
+    }       
+    return tecla;
+}
+
+
 void main()
 {
     int i, j;
-    char c, tecla= ' ';
-    uint8_t kp;
+    char c, tecla;
     
     TRISB6_bit = 0;            //LED1
     TRISB7_bit = 0;            //LED2
@@ -101,7 +127,7 @@ void main()
              
         
         do {  
-           kp = Keypad_Key_Click();
+           tecla = Keypad_Get_Char();
            if(!isdigit(c)){// && (atoi(c)>9)){
                  c = '0'; 
            }
@@ -117,37 +143,13 @@ void main()
             Retardo_ms(retardo);     //retardo
             LED1 = 0;         
             Retardo_ms(retardo);     //retardo
-        } while(!kp);
+        } while(!tecla);
          
         LED2 = 1;
         Delay_ms(500);     //retardo
         LED2 = 0;           
         Delay_ms(500);     //retardo
         
-        switch (kp) {
-          //case 10: kp = 42; break;  // '*'   // Uncomment this block for keypad4x3
-          //case 11: kp = 48; break;  // '0'   
-          //case 12: kp = 35; break;  // '#'
-          //default: kp += 48;
-                                            
-          case  1: tecla = 55; break; // 7
-          case  2: tecla = 56; break; // 8
-          case  3: tecla = 57; break; // 9
-          case  4: tecla = '%'; break; // A
-          case  5: tecla = 52; break; // 4
-          case  6: tecla = 53; break; // 5
-          case  7: tecla = 54; break; // 6
-          case  8: tecla = '*'; break; // B
-          case  9: tecla = 49; break; // 1        // Uncomment this block for keypad4x4
-          case 10: tecla = 50; break; // 2
-          case 11: tecla = 51; break; // 3
-          case 12: tecla = '-'; break; // C
-          case 13: tecla = 'C'; break; // *
-          case 14: tecla = 48; break; // 0
-          case 15: tecla = '='; break; // #
-          case 16: tecla = '+'; break; // D
-
-        }       
         
         //Lcd_Chr(1,9,tecla);
         if(tecla == '='){
