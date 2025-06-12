@@ -54,8 +54,7 @@ Count=1
 [LIB_EXPANDED_NODES]
 0=mikroE Libraries
 1=System Libraries
-129=EPSON_S1D13700
-162=FLASH
+30=Conversions
 196=I2C
 212=Keypad4x4
 216=Lcd
@@ -70,4 +69,4 @@ Count=1
 478=T6963C
 509=TouchPanel
 521=UART
-Count=18
+Count=17

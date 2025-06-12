@@ -131,6 +131,7 @@ void main()
            if(!isdigit(c)){// && (atoi(c)>9)){
                  c = '0'; 
            }
+           Lcd_Chr(1,15, tecla);
            Lcd_Chr(1,16,c++);
            
            
