@@ -10,3 +10,8 @@
 *.log
 *.lst
 *.mcppi_callertable.txt
+*.bmk
+*.brk
+*.cfg
+*.dic
+*.workspace
