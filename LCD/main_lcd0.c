@@ -62,8 +62,6 @@ void main()
     
     Delay_ms(1500);
     Lcd_Cmd(_LCD_CLEAR);
-    Lcd_Out(1, 1, "Char CG: ");  
-    Lcd_Out(2,1, ":)->");
    
     while (1){
         Lcd_Out(1,1, "Test LCD 16x2");
