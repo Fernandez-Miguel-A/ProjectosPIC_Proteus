@@ -54,5 +54,7 @@ void main()
                PORTD = segment[j];         // 'i'  led
                Delay_ms(1000);  
            }
+           // El 7segmentos tradicional falla en algunos ensayos. Debo usar el de
+           //    pines mas angosto.
      }
 }
