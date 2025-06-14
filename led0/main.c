@@ -3,6 +3,8 @@
 #include "stdint.h"
 
 
+#define    _7SEGMENTOS(x)               (PORTD = x | (PORTD&0xFF80))
+
 
 uint8_t segment[10]={
 63,6,91,79,102,109,125,7,127,103
@@ -51,7 +53,7 @@ void main()
            }
            j = 0;                     
            for(; j< 10; j++){
-               PORTD = segment[j];         // 'i'  led
+               PORTD = _7SEGMENTOS(segment[j]);    //PORTD = segment[j];         // 'i'  led
                Delay_ms(1000);  
            }
            // El 7segmentos tradicional falla en algunos ensayos. Debo usar el de
