@@ -58,5 +58,10 @@ void main()
            }
            // El 7segmentos tradicional falla en algunos ensayos. Debo usar el de
            //    pines mas angosto.
+           _7SEGMENTOS(0x00);
+           RD7_bit = 0;
+           Delay_ms(1000);
+           RD7_bit = 1;     
+           Delay_ms(1000);  
      }
 }
