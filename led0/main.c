@@ -3,7 +3,9 @@
 #include "stdint.h"
 
 
-#define    _7SEGMENTOS(x)               (PORTD = x | (PORTD&0xFF80))
+#define    _7SEGMENTOS(x)               (PORTD = (0xFF80&PORTD) | (0x007F&x))
+//_ #define    _7SEGMENTOS(x)               (PORTD |= (x&0x007F))
+
 
 
 uint8_t segment[10]={
