@@ -40,7 +40,7 @@ uint8_t estado_teclado= E1;
 #define    LED1    RB6_bit  
 #define    LED2    RB7_bit  
 #define    but    RE0_bit
-
+/*
 int8_t atoi(char c)
 {
     if (isdigit(c)){
@@ -49,6 +49,7 @@ int8_t atoi(char c)
          return -1;
 }
 
+
 int StrToInt(char *s)
 {
     int i=0, sal=0;
@@ -56,7 +57,7 @@ int StrToInt(char *s)
         sal = sal*10 + (s[i++]-48);   
     }
     return sal;
-}          
+}*/
 void Retardo_ms(int n)
 {
      int i;
@@ -86,7 +87,7 @@ char Keypad_Get_Char(void)
         case 14: tecla = 48; break; // 0
         case 15: tecla = '='; break; // #
         case 16: tecla = '+'; break; // D
-        default: tecla = c;                                                                                        //Unico valor al parecer es:  0
+        default: tecla = '0';                                                                                        //Unico valor al parecer es:  0
     }       
     return tecla;
 }
@@ -140,9 +141,10 @@ void main()
               IntToStr(retardo, Txt);
               Lcd_Out(2,1,Txt);
            } 
-            LED1 = 1;
+            LED1 = 0;
             Retardo_ms(retardo);     //retardo
-            LED1 = 0;         
+            LED1 = 1;                   // El cpu se bloquea
+                                        // mantiene encendido el led.
             Retardo_ms(retardo);     //retardo
         } while(!tecla);
          
@@ -153,6 +155,7 @@ void main()
         
         
         //Lcd_Chr(1,9,tecla);
+
         if(tecla == '='){
             if(retardo_s[0] != 0)
                 retardo = StrToInt(retardo_s);
@@ -194,7 +197,10 @@ void main()
                      Delay_ms(600);
                      estado_teclado = E1;
                      break;
-        } 
+            default:
+                    estado_teclado = E1;
+                    break;
+        }
         
 //        Lcd_Out(2, 9, retardo_s);   
         
