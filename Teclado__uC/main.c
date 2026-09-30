@@ -7,7 +7,7 @@ uint8_t segment[10]={  //125
 63,6,91,79,102,109,125,7,127,103
 };
  
-char keypadPort at PORTC;   
+char keypadPort at PORTD;
      
 // Lcd module connections
 sbit LCD_RS at RB4_bit;   //PORTDbits.RD4    //LATD4_bit   //LATDbits.LATD4     //PORTD //LATD
@@ -87,7 +87,7 @@ char Keypad_Get_Char(void)
         case 14: tecla = 48; break; // 0
         case 15: tecla = '='; break; // #
         case 16: tecla = '+'; break; // D
-        default: tecla = '0';                                                                                        //Unico valor al parecer es:  0
+        default: tecla = 0;                                                                                        //Unico valor al parecer es:  0
     }       
     return tecla;
 }
@@ -102,6 +102,19 @@ void main()
     TRISB7_bit = 0;            //LED2
 
     TRISE0_bit = 1;               //boton
+    
+    /*
+    // Teclado Matricial
+    TRISD0_bit = 1;
+    TRISD1_bit = 1;
+    TRISD2_bit = 1;
+    TRISD3_bit = 1;
+
+    TRISD4_bit = 0;
+    TRISD5_bit = 0;
+    TRISD6_bit = 0;
+    TRISD7_bit = 0;
+    */
     
     ADCON1 |= 0x0f;      // PINES HABILITADOS COMO DIGITALES
 //    ADCON0 |= 0x0f;      // PINES HABILITADOS COMO DIGITALES
@@ -149,9 +162,9 @@ void main()
         } while(!tecla);
          
         LED2 = 1;
-        Delay_ms(500);     //retardo
+        Delay_ms(50);     //retardo
         LED2 = 0;           
-        Delay_ms(500);     //retardo
+        Delay_ms(50);     //retardo
         
         
         //Lcd_Chr(1,9,tecla);

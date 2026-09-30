@@ -53,9 +53,8 @@ Count=6
 Count=1
 [LIB_EXPANDED_NODES]
 0=mikroE Libraries
-1=System Libraries
 231=Keypad4x4
-Count=3
+Count=2
 [PROGRAMMER_TYPE]
 Value=mikroE mikroProg
 [CODEGRIP_OPTIONS]
