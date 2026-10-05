@@ -95,7 +95,7 @@ void main()
     
       
     //F_pwm >= 10*F_c
-    PWM1_Init(1563*10);        // 1/(2*3.14159*7200*(10e-9)*math.sqrt(2))
+    PWM1_Init(1563*20);        // 1/(2*3.14159*7200*(10*1e-9)*math.sqrt(2))
      
     //PWM1_Set_Duty(0);// 0 -> 255.  255 es 100%
     
@@ -118,7 +118,7 @@ void main()
      Lcd_Out(1,9, str);   
     while (1){
               
-        Lcd_Out(2, 1, texto);                 //  (char *) texto            
+        /*Lcd_Out(2, 1, texto);                 //  (char *) texto
         //Delay_ms(800);
         if (SUBE == 0){
            Velo1 += 10;
@@ -140,7 +140,7 @@ void main()
                Lcd_Out(1,9, str); 
                Delay_ms(250);  
            }
-        }      
+        }*/
         
         //Bucle para recorres las 20 muestras
         //de un ciclo para la onda seno.
@@ -149,7 +149,7 @@ void main()
             //Cambio del ciclo útil del PWM.
             PWM1_Set_Duty( Seno[n] );
             //Retardo de 50u seg.
-            delay_ms(5);
+            delay_us(10);
         }
                        
     }
