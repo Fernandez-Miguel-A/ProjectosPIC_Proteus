@@ -113,10 +113,10 @@ char Keypad_Get_Char_uC(void)
     TRISD6_bit = 0;
     TRISD7_bit = 0;
 
-    RD4_bit = 0;
-    RD5_bit = 0;
-    RD6_bit = 0;
-    RD7_bit = 0;
+    RD4_bit = 1;
+    RD5_bit = 1;
+    RD6_bit = 1;
+    RD7_bit = 1;
 
     val_key = 0;
 
@@ -130,9 +130,9 @@ char Keypad_Get_Char_uC(void)
 
         for (c = 0; c < 4; c++) {
             column_mask = 0x01 << c;
-            if ((PORTD & column_mask) == 1) {
+            if ((PORTD & column_mask) == 0) {
                 Delay_ms(4);
-                while ((PORTD & column_mask) == 1);
+                while ((PORTD & column_mask) == 0);
                 Delay_ms(4);
                 val_key = keys[r][c];
             }
