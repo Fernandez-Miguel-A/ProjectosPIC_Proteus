@@ -3,6 +3,7 @@
 #include "string.h"
 
 
+
 uint8_t segment[10]={  //125
 63,6,91,79,102,109,125,7,127,103
 };
@@ -30,7 +31,6 @@ char texto[] = "VIEJO PIC16F877A";     // Usando 'const' No muestra el texto
 char Txt[20];
 
 
-int res_=0;
 int retardo = 500; // en 'msecs' .0-> 65535
 char retardo_s[5];
 
@@ -69,7 +69,7 @@ void Retardo_ms(int n)
 char Keypad_Get_Char(void)
 {
     char c, tecla;
-    c = Keypad_Key_Click();
+//*    c = Keypad_Key_Click();
     switch (c) {                                                                                
         case  1: tecla = 55; break; // 7
         case  2: tecla = 56; break; // 8
@@ -91,6 +91,137 @@ char Keypad_Get_Char(void)
     }       
     return tecla;
 }
+
+
+//:_begin
+
+#define    res    0
+#define    te_c1    RD0_bit
+#define    te_c2    RD1_bit
+#define    te_c3    RD2_bit
+#define    te_c4    RD3_bit
+
+#define    HAL_Delay(x)    Delay_ms(x)
+
+uint8_t res_=res;
+
+
+uint8_t t_tecla1()
+{
+    RD4_bit = !res_;//activa solo la fila 1
+    RD5_bit = res_;
+    RD6_bit = res_;
+    RD7_bit = res_;
+
+     if (te_c1==!res_   ) return(1);
+     else if (te_c2==!res_) return(2);
+     else if (te_c3==!res_) return(3);
+    else if (te_c4==!res_) return(4);   //comentar si es 3*4
+    else return(0);
+}
+
+uint8_t t_tecla2()
+{
+    RD4_bit = res_;
+    RD5_bit = !res_;//activa solo la fila 2
+    RD6_bit = res_;
+    RD7_bit = res_;
+
+     if (te_c1==!res_   ) return(5);
+     else if (te_c2==!res_) return(6);
+     else if (te_c3==!res_) return(7);
+    else if (te_c4==!res_) return(8);   //comentar si es 3*4
+    else return(0);
+}
+
+
+uint8_t t_tecla3()
+{
+    RD4_bit = res_;
+    RD5_bit = res_;
+    RD6_bit = !res_;//activa solo la fila 3
+    RD7_bit = res_;
+
+     if (te_c1==!res_   ) return(9);
+     else if (te_c2==!res_) return(10);
+     else if (te_c3==!res_) return(11);
+    else if (te_c4==!res_) return(12);   //comentar si es 3*4
+    else return(0);
+}
+
+
+uint8_t t_tecla4()
+{
+    RD4_bit = res_;
+    RD5_bit = res_;
+    RD6_bit = res_;
+    RD7_bit = !res_;//activa solo la fila 4
+
+     if (te_c1==!res_   ) return(13);
+     else if (te_c2==!res_) return(14);
+     else if (te_c3==!res_) return(15);
+    else if (te_c4==!res_) return(16);   //comentar si es 3*4
+    else return(0);
+}
+
+
+//Funcion para ver si hay una tecla presionada
+uint8_t tecla_presionada()
+{
+  uint8_t te;
+
+  te=t_tecla1();
+  if (te!=0) return (te);
+  HAL_Delay(5);
+  te=t_tecla2();
+  if (te!=0) return (te);
+  HAL_Delay(5);
+  te=t_tecla3();
+  if (te!=0) return (te);
+  HAL_Delay(5);
+  te=t_tecla4();
+  if (te!=0) return (te);
+}
+
+
+
+//Función para decodificar el teclado.
+uint8_t tecla_deco()
+{
+//Estructura switch case para evaluar los valores_ retornados
+//por la librería del teclado.
+
+    TRISD0_bit = 1;
+    TRISD1_bit = 1;
+    TRISD2_bit = 1;
+    TRISD3_bit = 1;
+    TRISD4_bit = 0;
+    TRISD5_bit = 0;
+    TRISD6_bit = 0;
+    TRISD7_bit = 0;
+  switch( tecla_presionada () )
+  {
+  case 1: return '7'; break;
+  case 2: return '8'; break;
+  case 3: return '9'; break;
+  case 4: return '%'; break;
+  case 5: return '4';  break;
+  case 6: return '5'; break;
+  case 7: return '6'; break;
+  case 8: return '*'; break;
+  case 9: return '1'; break;
+  case 10: return '2'; break;
+  case 11: return '3'; break;
+  case 12: return '-'; break;
+  case 13: return 'C';  break;
+  case 14: return '0';  break;
+  case 15: return '=';  break;
+  case 16: return '+';  break;
+  default: return 0; break; //Tecla no pulsada.
+  }
+}
+
+//:_end
 
 
 void main()
@@ -125,7 +256,7 @@ void main()
     RB6_bit = 0;
     RB7_bit = 0;
               
-    Keypad_Init();
+    //*Keypad_Init();
     
     Lcd_Init();                        // Initialize Lcd
     Delay_ms(15);
@@ -141,7 +272,7 @@ void main()
              
         
         do {  
-           tecla = Keypad_Get_Char();
+           tecla = tecla_deco();
            if(!isdigit(c)){// && (atoi(c)>9)){
                  c = '0'; 
            }
