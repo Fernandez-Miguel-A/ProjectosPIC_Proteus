@@ -237,6 +237,7 @@ uint8_t tecla_presionada()
   HAL_Delay(5);
   te=t_tecla4();
   if (te!=0) return (te);
+  return 0;
 }
 
 
@@ -330,41 +331,41 @@ void main()
         do {  
            tecla = tecla_deco();
            if(!isdigit(c)){// && (atoi(c)>9)){
-                 c = '0'; 
+                 c = '0';
            }
            Lcd_Chr(1,15, tecla);
            Lcd_Chr(1,16,c++);
-           
-           
+
+
            if (but == 0){
               Lcd_Out(2,1,"                ");
               IntToStr(retardo, Txt);
               Lcd_Out(2,1,Txt);
-           } 
+           }
             LED1 = 0;
             Retardo_ms(retardo);     //retardo
             LED1 = 1;                   // El cpu se bloquea
                                         // mantiene encendido el led.
             Retardo_ms(retardo);     //retardo
         } while(!tecla);
-         
+
         LED2 = 1;
         Delay_ms(50);     //retardo
-        LED2 = 0;           
+        LED2 = 0;
         Delay_ms(50);     //retardo
-        
-        
+
+
         //Lcd_Chr(1,9,tecla);
 
         if(tecla == '='){
             if(retardo_s[0] != 0)
                 retardo = StrToInt(retardo_s);
-                
+
         }
         if(!isdigit(tecla)){
             estado_teclado = Efin;
         }
-                          
+
         switch(estado_teclado){
             case E1: retardo_s[0] = tecla;
                      retardo_s[1] = 0;
