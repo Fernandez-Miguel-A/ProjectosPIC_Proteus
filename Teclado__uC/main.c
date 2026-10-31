@@ -69,7 +69,7 @@ void Retardo_ms(int n)
 char Keypad_Get_Char(void)
 {
     char c, tecla;
-//*    c = Keypad_Key_Click();
+    c = Keypad_Key_Click();
     switch (c) {                                                                                
         case  1: tecla = 55; break; // 7
         case  2: tecla = 56; break; // 8
@@ -99,6 +99,37 @@ const char keys[4][4] = {{'7','8','9','%'},
                          {'1','2','3','-'},
                          {'C','0','=','+'}};
 
+char Keypad_Get_Char_copilot(void)
+{
+    uint8_t row, column;
+    unsigned short column_mask;
+
+    TRISD = 0x0F;
+    PORTD = 0x00;
+
+    for (row = 0; row < 4; row++) {
+        PORTD = (uint8_t)(0x10u << row);
+
+        for (column = 0; column < 4; column++) {
+            column_mask = (unsigned short)(1u << column);
+            if ((PORTD & column_mask) != 0) {
+                Delay_ms(20);
+                if ((PORTD & column_mask) != 0) {
+                    val_key = keys[row][column];
+                    PORTD = 0x00;
+                    return val_key;
+                }
+            }
+        }
+
+        PORTD = 0x00;
+    }
+
+    val_key = 0;
+    return val_key;
+}
+
+
 char Keypad_Get_Char_uC(void)
 {
     uint8_t r, c;
@@ -113,37 +144,42 @@ char Keypad_Get_Char_uC(void)
     TRISD6_bit = 0;
     TRISD7_bit = 0;
 
+    /*
     RD4_bit = 1;
     RD5_bit = 1;
     RD6_bit = 1;
-    RD7_bit = 1;
+    RD7_bit = 1;*/
+    PORTD = 0xF0;
 
     val_key = 0;
 
     for (r = 0; r < 4; r++) {
-        switch (r) {
+        /*switch (r) {
             case 0: RD4_bit = 0; break;
             case 1: RD5_bit = 0; break;
             case 2: RD6_bit = 0; break;
             default: RD7_bit = 0; break;
-        }
+        }*/
 
         for (c = 0; c < 4; c++) {
             column_mask = 0x01 << c;
-            if ((PORTD & column_mask) == 0) {
-                Delay_ms(4);
-                while ((PORTD & column_mask) == 0);
-                Delay_ms(4);
+            if ((PORTD & column_mask) == 1) {
+                Delay_ms(4); //: begin. si elimino el retardo se me cuelga Proteus
+                //while ((PORTD & column_mask) == 1);
+                Delay_ms(4); //: end.
                 val_key = keys[r][c];
+                
+                PORTD = 0xF0;
+                return val_key;
             }
         }
-
+        /*
         switch (r) {
             case 0: RD4_bit = 1; break;
             case 1: RD5_bit = 1; break;
             case 2: RD6_bit = 1; break;
             default: RD7_bit = 1; break;
-        }
+        }*/
     }
 
     return val_key;
@@ -329,7 +365,7 @@ void main()
              
         
         do {  
-           tecla = tecla_deco();
+           tecla = Keypad_Get_Char_copilot();
            if(!isdigit(c)){// && (atoi(c)>9)){
                  c = '0';
            }
