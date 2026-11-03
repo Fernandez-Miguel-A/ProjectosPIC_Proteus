@@ -9,59 +9,59 @@ uint8_t state_bit=state;
 
 uint8_t t_tecla1()
 {
-    RD4_bit = !state_bit;//activa solo la fila 1
-    RD5_bit = state_bit;
-    RD6_bit = state_bit;
-    RD7_bit = state_bit;
+    te_Put0 = !state_bit;//activa solo la fila 1
+    te_Put1 = state_bit;
+    te_Put2 = state_bit;
+    te_Put3 = state_bit;
 
-     if (te_c1==!state_bit   ) return(1);
-     else if (te_c2==!state_bit) return(2);
-     else if (te_c3==!state_bit) return(3);
-    else if (te_c4==!state_bit) return(4);   //comentar si es 3*4
+     if (te_read0==!state_bit   ) return(1);
+     else if (te_read1==!state_bit) return(2);
+     else if (te_read2==!state_bit) return(3);
+    else if (te_read3==!state_bit) return(4);   //comentar si es 3*4
     else return(0);
 }
 
 uint8_t t_tecla2()
 {
-    RD4_bit = state_bit;
-    RD5_bit = !state_bit;//activa solo la fila 2
-    RD6_bit = state_bit;
-    RD7_bit = state_bit;
+    te_Put0 = state_bit;
+    te_Put1 = !state_bit;//activa solo la fila 2
+    te_Put2 = state_bit;
+    te_Put3 = state_bit;
 
-     if (te_c1==!state_bit   ) return(5);
-     else if (te_c2==!state_bit) return(6);
-     else if (te_c3==!state_bit) return(7);
-    else if (te_c4==!state_bit) return(8);   //comentar si es 3*4
+     if (te_read0==!state_bit   ) return(5);
+     else if (te_read1==!state_bit) return(6);
+     else if (te_read2==!state_bit) return(7);
+    else if (te_read3==!state_bit) return(8);   //comentar si es 3*4
     else return(0);
 }
 
 
 uint8_t t_tecla3()
 {
-    RD4_bit = state_bit;
-    RD5_bit = state_bit;
-    RD6_bit = !state_bit;//activa solo la fila 3
-    RD7_bit = state_bit;
+    te_Put0 = state_bit;
+    te_Put1 = state_bit;
+    te_Put2 = !state_bit;//activa solo la fila 3
+    te_Put3 = state_bit;
 
-     if (te_c1==!state_bit   ) return(9);
-     else if (te_c2==!state_bit) return(10);
-     else if (te_c3==!state_bit) return(11);
-    else if (te_c4==!state_bit) return(12);   //comentar si es 3*4
+     if (te_read0==!state_bit   ) return(9);
+     else if (te_read1==!state_bit) return(10);
+     else if (te_read2==!state_bit) return(11);
+    else if (te_read3==!state_bit) return(12);   //comentar si es 3*4
     else return(0);
 }
 
 
 uint8_t t_tecla4()
 {
-    RD4_bit = state_bit;
-    RD5_bit = state_bit;
-    RD6_bit = state_bit;
-    RD7_bit = !state_bit;//activa solo la fila 4
+    te_Put0 = state_bit;
+    te_Put1 = state_bit;
+    te_Put2 = state_bit;
+    te_Put3 = !state_bit;//activa solo la fila 4
 
-     if (te_c1==!state_bit   ) return(13);
-     else if (te_c2==!state_bit) return(14);
-     else if (te_c3==!state_bit) return(15);
-    else if (te_c4==!state_bit) return(16);   //comentar si es 3*4
+     if (te_read0==!state_bit   ) return(13);
+     else if (te_read1==!state_bit) return(14);
+     else if (te_read2==!state_bit) return(15);
+    else if (te_read3==!state_bit) return(16);   //comentar si es 3*4
     else return(0);
 }
 
@@ -93,14 +93,7 @@ uint8_t tecla_deco()
 //Estructura switch case para evaluar los valores_ retornados
 //por la librería del teclado.
 
-    TRISD0_bit = 1;
-    TRISD1_bit = 1;
-    TRISD2_bit = 1;
-    TRISD3_bit = 1;
-    TRISD4_bit = 0;
-    TRISD5_bit = 0;
-    TRISD6_bit = 0;
-    TRISD7_bit = 0;
+    keypadPort = 0x0F; //Se activa el puerto D como entradas y salidas segun corresponda.
   switch( tecla_presionada () )
   {
   case 1: return '7'; break;
