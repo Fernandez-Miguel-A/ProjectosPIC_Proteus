@@ -6,7 +6,7 @@ Value=0
 [BUILD_TYPE]
 Value=1
 [ACTIVE_TAB]
-Value=main.c
+Value=keypad_X3.h
 [USE_EEPROM]
 Value=0
 [USE_HEAP]
@@ -18,7 +18,8 @@ Value=
 [FILES]
 File0=main.c
 File1=keypad.c
-Count=2
+File2=keypad_X3.c
+Count=3
 [BINARIES]
 Count=0
 [IMAGES]
@@ -28,7 +29,9 @@ ActiveImageIndex=-1
 File0=main.c
 File1=keypad.c
 File2=keypad.h
-Count=3
+File3=keypad_X3.c
+File4=keypad_X3.h
+Count=5
 [EEPROM]
 Count=0
 [ACTIVE_COMMENTS_FILES]
@@ -41,7 +44,8 @@ Count=0
 Count=0
 [HEADERS]
 File0=keypad.h
-Count=1
+File1=keypad_X3.h
+Count=2
 [PLDS]
 Count=0
 [Useses]
@@ -58,7 +62,7 @@ Count=2
 [LIB_EXPANDED_NODES]
 0=mikroE Libraries
 1=System Libraries
-Count=2
+Count=3
 [PROGRAMMER_TYPE]
 Value=mikroE mikroProg
 [CODEGRIP_OPTIONS]

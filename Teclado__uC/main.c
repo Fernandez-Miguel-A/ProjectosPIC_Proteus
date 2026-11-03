@@ -2,13 +2,14 @@
 #include <ctype.h>
 #include "string.h"
 #include "keypad.h"
+#include "keypad_X3.h"
 
 
 uint8_t segment[10]={  //125
 63,6,91,79,102,109,125,7,127,103
 };
  
-char keypadPort at PORTD;
+//char keypadPort at PORTD;
      
 // Lcd module connections
 sbit LCD_RS at RB4_bit;   //PORTDbits.RD4    //LATD4_bit   //LATDbits.LATD4     //PORTD //LATD
@@ -144,7 +145,7 @@ void main()
              
         
         do {  
-           tecla = Keypad_Get_Char_copilot();
+           tecla = tecla_deco();
            if(!isdigit(c)){// && (atoi(c)>9)){
                  c = '0';
            }

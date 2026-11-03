@@ -1,4 +1,4 @@
-
+#include <stdint.h>
 #define    state    1 // 0: pull-down, 1: pull-up
 
 // :begin_X3
@@ -14,7 +14,7 @@
 #define    te_Put3    RD7_bit
 
 //:: char keypadPort at PORTX;
-char keypadPort at TRISD;
+char keypadMode at TRISD;
 
 
 uint8_t t_tecla1(void);

@@ -93,7 +93,7 @@ uint8_t tecla_deco()
 //Estructura switch case para evaluar los valores_ retornados
 //por la librería del teclado.
 
-    keypadPort = 0x0F; //Se activa el puerto D como entradas y salidas segun corresponda.
+    keypadMode = 0x0F; //Se activa el puerto D como entradas y salidas segun corresponda.
   switch( tecla_presionada () )
   {
   case 1: return '7'; break;
