@@ -15,3 +15,4 @@
 *.cfg
 *.dic
 *.workspace
+*_callertable.txt
