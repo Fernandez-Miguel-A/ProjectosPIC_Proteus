@@ -17,24 +17,24 @@ uint8_t t_tecla1()
      if (te_read0==!state_bit){
         Delay_ms(15);
          while (te_read0==!state_bit);
-         return(1);
+         return 1;
      }
      else if (te_read1==!state_bit){
         Delay_ms(15);
         while (te_read1==!state_bit);
-        return(2);
+        return 2;
      } 
      else if (te_read2==!state_bit){
         Delay_ms(15);
         while (te_read2==!state_bit);
-        return(3);
+        return 3;
      }
     else if (te_read3==!state_bit){
         Delay_ms(15);
         while (te_read3==!state_bit);
-        return(4);
+        return 4;
     }   //comentar si es 3*4
-    else return(0);
+    else return 0;
 }
 
 uint8_t t_tecla2()
@@ -44,11 +44,11 @@ uint8_t t_tecla2()
     te_Put2 = state_bit;
     te_Put3 = state_bit;
 
-     if (te_read0==!state_bit   ){Delay_ms(15);while (te_read0==!state_bit); return(5);}
-     else if (te_read1==!state_bit){Delay_ms(15);while (te_read1==!state_bit); return(6);}
-     else if (te_read2==!state_bit){Delay_ms(15);while (te_read2==!state_bit); return(7);}
-    else if (te_read3==!state_bit){Delay_ms(15);while (te_read3==!state_bit); return(8);}   //comentar si es 3*4
-    else return(0);
+     if (te_read0==!state_bit   ){Delay_ms(15);while (te_read0==!state_bit); return 5;}
+     else if (te_read1==!state_bit){Delay_ms(15);while (te_read1==!state_bit); return 6;}
+     else if (te_read2==!state_bit){Delay_ms(15);while (te_read2==!state_bit); return 7;}
+    else if (te_read3==!state_bit){Delay_ms(15);while (te_read3==!state_bit); return 8;}   //comentar si es 3*4
+    else return 0;
 }
 
 
@@ -59,11 +59,11 @@ uint8_t t_tecla3()
     te_Put2 = !state_bit;//activa solo la fila 3
     te_Put3 = state_bit;
 
-     if (te_read0==!state_bit   ){Delay_ms(15);while (te_read0==!state_bit); return(9);}
-     else if (te_read1==!state_bit){Delay_ms(15);while (te_read1==!state_bit); return(10);}
-     else if (te_read2==!state_bit){Delay_ms(15);while (te_read2==!state_bit); return(11);}
-    else if (te_read3==!state_bit){Delay_ms(15);while (te_read3==!state_bit); return(12);}   //comentar si es 3*4
-    else return(0);
+     if (te_read0==!state_bit   ){Delay_ms(15);while (te_read0==!state_bit); return 9;}
+     else if (te_read1==!state_bit){Delay_ms(15);while (te_read1==!state_bit); return 10;}
+     else if (te_read2==!state_bit){Delay_ms(15);while (te_read2==!state_bit); return 11;}
+    else if (te_read3==!state_bit){Delay_ms(15);while (te_read3==!state_bit); return 12;}   //comentar si es 3*4
+    else return 0;
 }
 
 
@@ -74,11 +74,11 @@ uint8_t t_tecla4()
     te_Put2 = state_bit;
     te_Put3 = !state_bit;//activa solo la fila 4
 
-     if (te_read0==!state_bit){Delay_ms(15);while (te_read0==!state_bit); return(13);}
-     else if (te_read1==!state_bit){Delay_ms(15);while (te_read1==!state_bit); return(14);}
-     else if (te_read2==!state_bit){Delay_ms(15);while (te_read2==!state_bit); return(15);}
-    else if (te_read3==!state_bit){Delay_ms(15);while (te_read3==!state_bit); return(16);}   //comentar si es 3*4
-    else return(0);
+     if (te_read0==!state_bit){Delay_ms(15);while (te_read0==!state_bit); return 13;}
+     else if (te_read1==!state_bit){Delay_ms(15);while (te_read1==!state_bit); return 14;}
+     else if (te_read2==!state_bit){Delay_ms(15);while (te_read2==!state_bit); return 15;}
+    else if (te_read3==!state_bit){Delay_ms(15);while (te_read3==!state_bit); return 16;}   //comentar si es 3*4
+    else return 0;
 }
 
 
