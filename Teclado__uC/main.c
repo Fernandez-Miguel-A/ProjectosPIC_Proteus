@@ -153,7 +153,8 @@ void main()
     
     RB6_bit = 0;
     RB7_bit = 0;
-
+    
+    // Timer1:
     T1CON = 0x00;
     TMR1H = 0xFD;
     TMR1L = 0x8F;
@@ -162,11 +163,12 @@ void main()
     PEIE_bit = 1;
     GIE_bit = 1;
     T1CON = 0x31;   // Timer1 encendido: interrupción de 1 ms, reloj interno, prescaler 1:8
-              
+    // end:_
+    
     //*Keypad_Init();
     
     Lcd_Init();                        // Initialize Lcd
-    Delay_ms(15);
+    Delay_ms(15);                      // aguarda a que el Lcd se estabilice
     
     Lcd_Cmd(_LCD_CLEAR);               // Clear display
     Lcd_Cmd(_LCD_CURSOR_OFF);          // Cursor off
@@ -195,8 +197,6 @@ void main()
            //: modif retardo aqui Retardo_ms(retardo);
            //retardo = 500;
         } while(!tecla);
-
-
 
         //Lcd_Chr(1,9,tecla);
 
