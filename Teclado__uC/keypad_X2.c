@@ -1,4 +1,4 @@
-#include "keypad.h"
+#include "keypad_X2.h"
 #include <stdbool.h>
 
 char val_key;
