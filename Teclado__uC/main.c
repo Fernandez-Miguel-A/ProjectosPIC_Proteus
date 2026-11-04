@@ -128,7 +128,8 @@ void destellar() iv 0x0004 ics ICS_AUTO
                 timer_50ms_ticks = 0;
                 Timer_500ms();
             }*/
-        }else if (timer1_ticks2 >= retardo) {
+        }
+        if (timer1_ticks2 >= retardo) {
             timer1_ticks2 = 0;
             Timer_retardo_ms();
         }
@@ -198,7 +199,7 @@ void main()
            //retardo = 500;
         } while(!tecla);
 
-        //Lcd_Chr(1,9,tecla);
+        // Retardo 50 ms
 
         if(tecla == '='){
             if(retardo_s[0] != 0)
