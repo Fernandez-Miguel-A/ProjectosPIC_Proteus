@@ -37,10 +37,22 @@ char retardo_s[5];
 
 enum teclado_estado {E1, E2, E3, E4, Efin};
 uint8_t estado_teclado= E1;
+volatile uint16_t timer1_ticks = 0, timer1_ticks2 = 0;
+volatile uint16_t timer_50ms_ticks = 0;
 
 #define    LED1    RB6_bit  
 #define    LED2    RB7_bit  
 #define    but    RE0_bit
+
+void Timer_retardo_ms(void)
+{
+    LED1 = !LED1;
+}
+void Timer_50ms(void)
+{
+    LED2 = !LED2;
+}
+
 /*
 int8_t atoi(char c)
 {
@@ -59,14 +71,6 @@ int StrToInt(char *s)
     }
     return sal;
 }*/
-void Retardo_ms(int n)
-{
-     int i;
-     for(i=0; i<n; i++){
-         Delay_1ms();
-     }
-}
-
 char Keypad_Get_Char(void)
 {
     char c, tecla;
@@ -96,6 +100,40 @@ char Keypad_Get_Char(void)
 
 #define    HAL_Delay(x)    Delay_ms(x)
 
+void Retardo_ms(int n)
+{
+     int i;
+     for(i=0; i<n; i++){
+         Delay_1ms();
+     }
+}
+
+
+void destellar() iv 0x0004 ics ICS_AUTO
+{
+    if (TMR1IF_bit) {
+        TMR1H = 0xFD;
+        TMR1L = 0x8F;   // 1 ms a 20 MHz, prescaler 1:8
+        TMR1IF_bit = 0;
+
+        timer1_ticks++;
+        timer1_ticks2++;
+        if (timer1_ticks >= 50) {
+            timer1_ticks = 0;
+            Timer_50ms();
+
+            /*
+            timer_50ms_ticks++;
+            if (timer_50ms_ticks >= 10) {
+                timer_50ms_ticks = 0;
+                Timer_500ms();
+            }*/
+        }else if (timer1_ticks2 >= retardo) {
+            timer1_ticks2 = 0;
+            Timer_retardo_ms();
+        }
+    }
+}
 
 void main()
 {
@@ -128,6 +166,15 @@ void main()
     
     RB6_bit = 0;
     RB7_bit = 0;
+
+    T1CON = 0x00;
+    TMR1H = 0xFD;
+    TMR1L = 0x8F;
+    TMR1IF_bit = 0;
+    TMR1IE_bit = 1;
+    PEIE_bit = 1;
+    GIE_bit = 1;
+    T1CON = 0x31;   // Timer1 encendido: interrupción de 1 ms, reloj interno, prescaler 1:8
               
     //*Keypad_Init();
     
@@ -158,17 +205,10 @@ void main()
               IntToStr(retardo, Txt);
               Lcd_Out(2,1,Txt);
            }
-            LED1 = 0;
-            Retardo_ms(retardo);     //retardo
-            LED1 = 1;                   // El cpu se bloquea
-                                        // mantiene encendido el led.
-            Retardo_ms(retardo);     //retardo
+           //: modif retardo aqui Retardo_ms(retardo);
+           //retardo = 500;
         } while(!tecla);
 
-        LED2 = 1;
-        Delay_ms(50);     //retardo
-        LED2 = 0;
-        Delay_ms(50);     //retardo
 
 
         //Lcd_Chr(1,9,tecla);
