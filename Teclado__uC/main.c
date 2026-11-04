@@ -144,20 +144,7 @@ void main()
     TRISB7_bit = 0;            //LED2
 
     TRISE0_bit = 1;               //boton
-    
-    /*
-    // Teclado Matricial
-    TRISD0_bit = 1;
-    TRISD1_bit = 1;
-    TRISD2_bit = 1;
-    TRISD3_bit = 1;
 
-    TRISD4_bit = 0;
-    TRISD5_bit = 0;
-    TRISD6_bit = 0;
-    TRISD7_bit = 0;
-    */
-    
     ADCON1 |= 0x0f;      // PINES HABILITADOS COMO DIGITALES
 //    ADCON0 |= 0x0f;      // PINES HABILITADOS COMO DIGITALES
 //    ADCON2 
